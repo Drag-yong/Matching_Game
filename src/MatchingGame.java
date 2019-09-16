@@ -63,7 +63,7 @@ public class MatchingGame {
         message = "";
         cards = new Card[CARD_IMAGES_NAMES.length * 2];
 
-//       shuffleCards();
+        shuffleCards();
     }
 
     /**
@@ -83,7 +83,7 @@ public class MatchingGame {
         // Set the color used for the background of the Processing window
         processing.background(245, 255, 250); // Mint cream color
 
-        shuffleCards();
+//        shuffleCards();
 
         displayMessage(message);
     }
@@ -145,7 +145,7 @@ public class MatchingGame {
 
         for (int i = 0; i < CARDS_COORDINATES.length; i++) { // deploy the cards according to the list
             cards[i] = new Card(images[i / 2], CARDS_COORDINATES[numList[i]][0], CARDS_COORDINATES[numList[i]][1]);
-//            cards[i].setVisible(true);
+            cards[i].setVisible(true);
             cards[i].draw();
         }
     }

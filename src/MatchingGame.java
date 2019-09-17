@@ -83,9 +83,13 @@ public class MatchingGame {
         // Set the color used for the background of the Processing window
         processing.background(245, 255, 250); // Mint cream color
 
-        shuffleCards();
-
         displayMessage(message);
+
+        for (int i = 0; i < CARDS_COORDINATES.length; i++) { // deploy the cards according to the list
+            cards[i] = new Card(images[i / 2], CARDS_COORDINATES[numList[i]][0], CARDS_COORDINATES[numList[i]][1]);
+//            cards[i].setVisible(true);
+            cards[i].draw();
+        }
     }
 
     /**
@@ -111,8 +115,15 @@ public class MatchingGame {
         int mouseX = processing.mouseX;
         int mouseY = processing.mouseY;
 
+        System.out.println(card.getImage());
+        System.out.println(card.getX());
+        System.out.println(card.getY());
+        System.out.println(mouseX);
+        System.out.println(mouseY);
+
         if (card.getX() - halfWidth <= mouseX && mouseX <= card.getX() + halfWidth &&
                 card.getY() - halfHeight <= mouseY && mouseY <= card.getY() + halfHeight) {
+            System.out.println("isMouseOver!");
             return true;
         }
         return false;
@@ -124,6 +135,7 @@ public class MatchingGame {
     public static void mousePressed() {
         for (int i = 0; i < cards.length; i++) {
             if (isMouseOver(cards[i])) {
+                System.out.println("mousePressed!!");
                 cards[i].setVisible(true);
                 cards[i].select();
             }
@@ -145,8 +157,8 @@ public class MatchingGame {
     //////////////////
     //private method//
     //////////////////
+    private static int[] numList = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11}; // I will shuffle this with randGen
     private static void shuffleCards() { // This private method will shuffle the cards in order to the randGen
-        int[] numList = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11}; // I will shuffle this with randGen
         for (int i = 0; i < numList.length; i++) { // shuffle the list
             int ranNum = randGen.nextInt(12);
             int temp = numList[ranNum];

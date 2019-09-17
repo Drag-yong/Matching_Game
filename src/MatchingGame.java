@@ -113,33 +113,61 @@ public class MatchingGame {
         int mouseX = processing.mouseX;
         int mouseY = processing.mouseY;
 
-        System.out.println(card.getImage());
-        System.out.println(card.getX());
-        System.out.println(card.getY());
-        System.out.println(mouseX);
-        System.out.println(mouseY);
+//        System.out.println("-----------------------");
+//        System.out.println(card.getX());
+//        System.out.println(card.getY());
+//        System.out.println(mouseX);
+//        System.out.println(mouseY);
 
-        if (card.getX() - halfWidth <= mouseX && mouseX <= card.getX() + halfWidth &&
-                card.getY() - halfHeight <= mouseY && mouseY <= card.getY() + halfHeight) {
-//            System.out.println("isMouseOver!");
-            return true;
-        }
-        return false;
+        return card.getX() - halfWidth <= mouseX && mouseX <= card.getX() + halfWidth &&
+                card.getY() - halfHeight <= mouseY && mouseY <= card.getY() + halfHeight;
     }
+
+    private static int cardNumber = 0;
 
     /**
      * Callback method called each time the user presses the mouse
      */
     public static void mousePressed() {
+        if (message.equals(NOT_MATCHED)) {
+            for (int i = 0; i < cards.length; i++) {
+                if (cards[i].equals(selectedCard1) || cards[i].equals(selectedCard2)) {
+                    cards[i].deselect();
+                    cards[i].setVisible(false);
+                }
+            }
+            message = "";
+            selectedCard1 = null;
+            selectedCard2 = null;
+        }
+
         for (int i = 0; i < cards.length; i++) {
-            if (isMouseOver(cards[i])) {
+            if (isMouseOver(cards[i]) && !cards[i].isVisible() && !winner) {
+                if (cardNumber == 0) { // first card
+                    selectedCard1 = cards[i];
+                    cardNumber++;
+                } else if (cardNumber == 1) { // second card
+                    selectedCard2 = cards[i];
+                    cardNumber = 0;
+                }
 //                System.out.println("mousePressed!!");
                 cards[i].setVisible(true);
                 cards[i].select();
             }
         }
 
-        if (matchedCardsCount == 6) {
+        if (selectedCard1 != null && selectedCard2 != null) {
+            if (matchingCards(selectedCard1, selectedCard2)) {
+                message = MATCHED;
+                matchedCardsCount++;
+                selectedCard1 = null;
+                selectedCard2 = null;
+            } else {
+                message = NOT_MATCHED;
+            }
+        }
+
+        if (matchedCardsCount >= 6) {
             message = CONGRA_MSG;
             winner = true;
         }
@@ -147,20 +175,23 @@ public class MatchingGame {
 
     /**
      * Checks whether two cards match or not
+     *
      * @param card1 reference to the first card
      * @param card2 reference to the second card
      * @return true if card1 and card2 image references are the same, false otherwise
      */
     public static boolean matchingCards(Card card1, Card card2) {
-        selectedCard1 = card1;
-        selectedCard2 = card2;
-        return selectedCard1.getImage().equals(selectedCard2.getImage());
+        return card1.getImage().equals(card2.getImage());
     }
 
     //////////////////
     //private method//
     //////////////////
     private static int[] numList = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11}; // I will shuffle this with randGen
+
+    /**
+     * Shuffle the card deck
+     */
     private static void shuffleCards() { // This private method will shuffle the cards in order to the randGen
         for (int i = 0; i < numList.length; i++) { // shuffle the list
             int ranNum = randGen.nextInt(12);

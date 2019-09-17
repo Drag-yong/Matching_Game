@@ -83,7 +83,7 @@ public class MatchingGame {
         // Set the color used for the background of the Processing window
         processing.background(245, 255, 250); // Mint cream color
 
-//        shuffleCards();
+        shuffleCards();
 
         displayMessage(message);
     }
@@ -123,12 +123,23 @@ public class MatchingGame {
      */
     public static void mousePressed() {
         for (int i = 0; i < cards.length; i++) {
-            Card card = cards[i];
-            if (isMouseOver(card)) {
-                card.setVisible(true);
-                card.select();
+            if (isMouseOver(cards[i])) {
+                cards[i].setVisible(true);
+                cards[i].select();
             }
         }
+    }
+
+    /**
+     * Checks whether two cards match or not
+     * @param card1 reference to the first card
+     * @param card2 reference to the second card
+     * @return true if card1 and card2 image references are the same, false otherwise
+     */
+    public static boolean matchingCards(Card card1, Card card2) {
+        selectedCard1 = card1;
+        selectedCard2 = card2;
+        return selectedCard1.getImage().equals(selectedCard2.getImage());
     }
 
     //////////////////
@@ -145,7 +156,7 @@ public class MatchingGame {
 
         for (int i = 0; i < CARDS_COORDINATES.length; i++) { // deploy the cards according to the list
             cards[i] = new Card(images[i / 2], CARDS_COORDINATES[numList[i]][0], CARDS_COORDINATES[numList[i]][1]);
-            cards[i].setVisible(true);
+//            cards[i].setVisible(true);
             cards[i].draw();
         }
     }

@@ -71,7 +71,7 @@ public class MatchingGame {
      */
     public static void keyPressed() {
         if (processing.key == 'n' || processing.key == 'N') {
-            shuffleCards();
+            initGame();
         }
     }
 
@@ -85,9 +85,7 @@ public class MatchingGame {
 
         displayMessage(message);
 
-        for (int i = 0; i < CARDS_COORDINATES.length; i++) { // deploy the cards according to the list
-            cards[i] = new Card(images[i / 2], CARDS_COORDINATES[numList[i]][0], CARDS_COORDINATES[numList[i]][1]);
-//            cards[i].setVisible(true);
+        for (int i = 0; i < cards.length; i++) {
             cards[i].draw();
         }
     }
@@ -123,7 +121,7 @@ public class MatchingGame {
 
         if (card.getX() - halfWidth <= mouseX && mouseX <= card.getX() + halfWidth &&
                 card.getY() - halfHeight <= mouseY && mouseY <= card.getY() + halfHeight) {
-            System.out.println("isMouseOver!");
+//            System.out.println("isMouseOver!");
             return true;
         }
         return false;
@@ -135,10 +133,15 @@ public class MatchingGame {
     public static void mousePressed() {
         for (int i = 0; i < cards.length; i++) {
             if (isMouseOver(cards[i])) {
-                System.out.println("mousePressed!!");
+//                System.out.println("mousePressed!!");
                 cards[i].setVisible(true);
                 cards[i].select();
             }
+        }
+
+        if (matchedCardsCount == 6) {
+            message = CONGRA_MSG;
+            winner = true;
         }
     }
 

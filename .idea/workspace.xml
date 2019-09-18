@@ -29,7 +29,7 @@
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="D:/용상이꺼/CS300MatchingGame.jar/CS300MatchingGame.jar!/" />
+    <property name="last_opened_file_path" value="$USER_HOME$/Desktop/CS300MatchingGame.jar/CS300MatchingGame.jar!/" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -105,6 +105,8 @@
       <workItem from="1568693552645" duration="3488000" />
       <workItem from="1568700258461" duration="2007000" />
       <workItem from="1568719490022" duration="5851000" />
+      <workItem from="1568765030074" duration="3794000" />
+      <workItem from="1568771133151" duration="344000" />
     </task>
     <servers />
   </component>

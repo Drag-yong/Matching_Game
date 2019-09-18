@@ -1,8 +1,8 @@
-import java.io.File;
-import java.util.Random;
-
 import processing.core.PApplet;
 import processing.core.PImage;
+
+import java.io.File;
+import java.util.Random;
 
 public class MatchingGame {
     // Congratulations message
@@ -32,6 +32,9 @@ public class MatchingGame {
     private static int matchedCardsCount; // number of cards matched so far
     // in one session of the game
     private static String message; // Displayed message to the display window
+    private static int cardNumber = 0;
+
+    private static int[] numList = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11}; // I will shuffle this with randGen
 
     /**
      * Defines the initial environment properties of this game as the program starts
@@ -123,8 +126,6 @@ public class MatchingGame {
                 card.getY() - halfHeight <= mouseY && mouseY <= card.getY() + halfHeight;
     }
 
-    private static int cardNumber = 0;
-
     /**
      * Callback method called each time the user presses the mouse
      */
@@ -170,6 +171,8 @@ public class MatchingGame {
         if (matchedCardsCount >= 6) {
             message = CONGRA_MSG;
             winner = true;
+            selectedCard1 = null;
+            selectedCard2 = null;
         }
     }
 
@@ -187,7 +190,6 @@ public class MatchingGame {
     //////////////////
     //private method//
     //////////////////
-    private static int[] numList = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11}; // I will shuffle this with randGen
 
     /**
      * Shuffle the card deck
@@ -202,8 +204,8 @@ public class MatchingGame {
 
         for (int i = 0; i < CARDS_COORDINATES.length; i++) { // deploy the cards according to the list
             cards[i] = new Card(images[i / 2], CARDS_COORDINATES[numList[i]][0], CARDS_COORDINATES[numList[i]][1]);
-//            cards[i].setVisible(true);
-            cards[i].draw();
+//            cards[i].setVisible(false);
+//            cards[i].draw();
         }
     }
 

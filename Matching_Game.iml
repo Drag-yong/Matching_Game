@@ -7,19 +7,10 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="module-library">
-      <library>
-        <CLASSES>
-          <root url="jar://D:/CS300MatchingGame.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
     <orderEntry type="module-library" exported="">
       <library>
         <CLASSES>
-          <root url="jar://D:/용상이꺼/CS300MatchingGame.jar/CS300MatchingGame.jar!/" />
+          <root url="jar://$USER_HOME$/Desktop/CS300MatchingGame.jar/CS300MatchingGame.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />

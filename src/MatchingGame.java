@@ -146,7 +146,7 @@ public class MatchingGame {
             if (isMouseOver(cards[i]) && !cards[i].isVisible() && !winner) {
                 if (cardNumber == 0) { // first card
                     selectedCard1 = cards[i];
-                    cardNumber++;
+                    cardNumber = 1;
                 } else if (cardNumber == 1) { // second card
                     selectedCard2 = cards[i];
                     cardNumber = 0;
